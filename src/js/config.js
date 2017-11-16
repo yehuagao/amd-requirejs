@@ -2,12 +2,13 @@
 require.config({
 	//各文件路径
 	paths:{
-		jquery:'../lib/jquery-3.2.1.min',
+		jquery:'../lib/jquery-1.11.1.min',
 		commom:'./common',
 		echarts:'../lib/echarts',
 		bootstrap:'../lib/bootstrap.min'
 	},
 	shim:{
-		bootstrap:['jquery']
+		bootstrap:['jquery'],
+		commom:['jquery']
 	}
 })

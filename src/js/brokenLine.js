@@ -2,7 +2,7 @@ require(['config'],function(){
 	require(['jquery', 'common', 'echarts','bootstrap'],function($, common, echarts, bootstrap){
 		//初始化echarts实例
 		var myChart = echarts.init(document.getElementById('main'));
-		$('.dropdown').dropdown()
+		
 		//指定图表的配置项和数据
 		var option = {
 			title:{

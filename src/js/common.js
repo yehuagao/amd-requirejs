@@ -1,5 +1,5 @@
 define(function(){
-	return {
+	var obj =  {
 		randomNum:function(min, max){
 			return parseInt(Math.random()*(max-min+1)) + min;
 		},
@@ -17,7 +17,6 @@ define(function(){
 			if(path){
 				str_cookie += ';path=' + path;
 			}
-
 			document.cookie = str_cookie;
 		},
 		getCookie:function(name){
@@ -43,7 +42,29 @@ define(function(){
 			var now = new Date();
 			now.setDate(now.getDate()-1);
 			document.cookie = name + '=0;expires=' + now.toUTCString();
+		},
+	 	ajaxFun:function(option){
+			$.ajax({
+				type: option.type,
+				url: option.url,
+				crossDomain: true,
+				beforeSend: function(request) {    
+					request.setRequestHeader("Content-Type", "application/json");          
+    			}.bind(this),
+				data: JSON.stringify(option.data),
+				success: function(res) {
+					if(typeof res.result == 'string'){
+						this.setCookie('access_token', res.result)
+					}
+					option.successFun(res)
+				}.bind(this),
+				error: function(err) {
+					option.failedFun(err)
+				}
+			});
+
 		}
 
 	}
+	return obj;
 })
